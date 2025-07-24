@@ -1,0 +1,20 @@
+<h1>Resultados para <%= @user.username %></h1>
+
+<h2>Estatísticas Individuais</h2>
+<ul>
+  <li>Aprovados: <%= @approved %></li>
+  <li>Rejeitados: <%= @rejected %></li>
+  <li>Média de palavras: <%= @stats["mean"].round(2) %></li>
+  <li>Mediana: <%= @stats["median"] %></li>
+  <li>Desvio padrão: <%= @stats["std_dev"].round(2) %></li>
+</ul>
+
+<h2>Estatísticas do Grupo</h2>
+<ul>
+  <li>Usuários analisados: <%= @group_stats[:users_analyzed] %></li>
+  <li>Média: <%= @group_stats[:mean].round(2) %></li>
+  <li>Mediana: <%= @group_stats[:median] %></li>
+  <li>Desvio padrão: <%= @group_stats[:std_dev].round(2) %></li>
+</ul>
+
+<%= link_to "Voltar", root_path %>

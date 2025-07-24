@@ -1,0 +1,15 @@
+<h1>Progresso da análise para <%= @user.username %></h1>
+
+<ul>
+  <li>Total de comentários: <%= @total %></li>
+  <li>Processados: <%= @processed %></li>
+  <li>Progresso: <%= @progress %>%</li>
+</ul>
+
+<% if @processed < @total %>
+  <p><strong>Atualize a página em alguns segundos...</strong></p>
+<% else %>
+  <%= link_to "Ver resultados", results_path(username: @user.username) %>
+<% end %>
+
+<%= link_to "Voltar", root_path %>

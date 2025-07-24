@@ -1,0 +1,84 @@
+class AnalyzeController < ApplicationController
+  def index
+  end
+
+  def create
+    username = params[:username]
+
+    quebrar
+
+    if username.blank?
+      redirect_to root_path, alert: "Username obrigatório"
+      return
+    else
+      begin
+        ImportUserDataService.new(username).call
+        redirect_to progress_path(username: username), notice: "Análise iniciada para #{username}"
+      rescue ImportUserDataService::UserNotFound
+        redirect_to root_path, alert: "Usuário '#{username}' não encontrado na API"
+      end
+    end
+  end
+
+  def show
+    @user = User.find_by(username: params[:username].capitalize)
+    return render json: { error: "User not found" }, status: :not_found unless @user
+
+    @analysis = @user.analysis
+    return render json: { error: "Analysis not available yet" }, status: :processing unless @analysis
+
+    group_stats = Analysis.all.map(&:stats)
+    words = group_stats.flat_map { |s| s["word_counts"] }
+
+    render json: {
+      user: @user.username,
+      approved: @user.comments.approved.count,
+      rejected: @user.comments.rejected.count,
+      stats: @analysis.stats,
+      group_stats: {
+        users_analyzed: Analysis.count,
+        mean: mean(words),
+        median: median(words),
+        std_dev: std_dev(words)
+      }
+    }
+  end
+
+  def progress
+    @user = User.find_by(username: params[:username])
+    @total = @user.comments.count
+    @processed = @user.comments.where.not(status: 'new').count
+    @progress = (@processed.to_f / @total * 100).round(2)
+
+    render json: {
+      user: @user.username,
+      total_comments: @total,
+      processed_comments: @processed,
+      progress: "#{(@processed.to_f / @total * 100).round(2)}%"
+    }
+  end
+
+  private
+
+  def median(arr)
+    return 0 if arr.empty?
+    sorted = arr.sort
+    mid = sorted.length / 2
+    sorted.length.odd? ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0
+  end
+
+  def std_dev(arr)
+    arr = arr.compact.map(&:to_f)
+    return 0 if arr.empty?
+
+    m = mean(arr)
+    Math.sqrt(arr.map { |x| (x - m)**2 }.sum / arr.size)
+  end
+
+  def mean(arr)
+    arr = arr.compact.map(&:to_f)
+    return 0 if arr.empty?
+
+    arr.sum / arr.size
+  end
+end
