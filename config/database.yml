@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: postgres
+  host: <%= ENV.fetch("DATABASE_HOST", "postgres") %>
+
+development:
+  <<: *default
+  database: comment_analyzer_development
+
+test:
+  <<: *default
+  database: comment_analyzer_test
+
+production:
+  <<: *default
+  database: comment_analyzer_production
+  username: root
+  password: <%= ENV['COMMENT_ANALYZER_DATABASE_PASSWORD'] %>

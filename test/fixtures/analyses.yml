@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  approved_count: 1
+  rejected_count: 1
+  stats: 
+
+two:
+  user: two
+  approved_count: 1
+  rejected_count: 1
+  stats: 
