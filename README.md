@@ -7,6 +7,7 @@ Este projeto processa comentários dos usuários, aplicando filtros por palavras
 ## 🧱 Arquitetura
 
 - **Ruby on Rails 5.2** – Framework principal.
+- **DevContainer com Docker e Compose.yaml** – Para executar o ambiente de Desenvolvimento
 - **Sidekiq** – Processamento assíncrono de comentários via Jobs.
 - **ActionCable (futuramente)** para envio em tempo real do progresso
 - **PostgreSQL** – Banco de dados relacional.
