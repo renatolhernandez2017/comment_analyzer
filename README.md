@@ -6,7 +6,7 @@ Este projeto processa comentários dos usuários, aplicando filtros por palavras
 
 ## 🧱 Arquitetura
 
-- **Ruby on Rails 7** – Framework principal.
+- **Ruby on Rails 5.2** – Framework principal.
 - **Sidekiq** – Processamento assíncrono de comentários via Jobs.
 - **ActionCable (futuramente)** para envio em tempo real do progresso
 - **PostgreSQL** – Banco de dados relacional.
@@ -15,7 +15,7 @@ Este projeto processa comentários dos usuários, aplicando filtros por palavras
 
 **Fluxo principal:**
 
-1. Admin cadastra palavras-chave.
+1. Página principal.
 2. Ao salvar ou editar uma palavra-chave, todos os usuários são reprocessados:
    - Cada `Comment` do usuário é analisado.
    - Marca os comentários como `approved` ou `rejected` com base nas keywords.
@@ -36,8 +36,6 @@ Este projeto processa comentários dos usuários, aplicando filtros por palavras
 
 - **Jobs Assíncronos**: Comentários são processados em background para evitar travar a interface.
 - **Machine State (AASM)**: `Comment` possui estados `new`, `processing`, `approved`, `rejected`, podendo retornar para `processing`.
-- **Callback no Model**: Após `commit` em `Keyword`, todos os `User` são reprocessados.
-- **I18n Locale**: `pt-BR` como idioma principal (é necessário definir em `config/application.rb`).
 
 ---
 
@@ -61,6 +59,8 @@ Durante o processamento, as seguintes estatísticas podem ser calculadas:
   Comentários "neutros" permanecem em processing, podendo ser analisados manualmente ou posteriormente com mais dados
 
 ## Como rodar localmente
+
+Necessário ter o vscode para execução
 
 - git@github.com:renatolhernandez2017/comment_analyzer.git
 - cd comment_analyzer
@@ -91,6 +91,3 @@ Resultados de métricas Individual com Grupo
 
 Resultados do Progresso da execução
 - http://localhost:3000/progress/NomeUsuário
-
-Resultados de métricas de Grupo
-- http://localhost:3000/results_groups
