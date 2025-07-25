@@ -115,3 +115,6 @@ Necessário ter o VsCode instalado para a execução
     {
       "word": "omnis"
     }
+
+## Para rodar os testes
+- bundle exec rspec

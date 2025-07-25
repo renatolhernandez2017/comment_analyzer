@@ -14,7 +14,8 @@ class AnalyzeController < ApplicationController
     else
       begin
         ImportUserDataService.new(username).call
-        redirect_to progress_path(username: username), notice: "Análise iniciada para #{username}"
+        user_id = User.find_by(username: username).id
+        redirect_to progress_path(id: user_id), notice: "Análise iniciada para #{username}"
       rescue ImportUserDataService::UserNotFound
         redirect_to root_path, alert: "Usuário '#{username}' não encontrado na API"
       end
@@ -22,7 +23,7 @@ class AnalyzeController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
     return render json: { error: "User not found" }, status: :not_found unless @user
 
     @analysis = @user.analysis

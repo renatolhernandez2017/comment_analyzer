@@ -44,10 +44,6 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.8.7)
-      public_suffix (>= 2.0.2, < 7.0)
-    archive-zip (0.13.1)
-      io-like (~> 0.4.0)
     arel (9.0.0)
     base64 (0.3.0)
     bindex (0.8.1)
@@ -55,18 +51,6 @@ GEM
       msgpack (~> 1.2)
     builder (3.3.0)
     byebug (11.1.3)
-    capybara (3.39.2)
-      addressable
-      matrix
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (>= 1.5, < 3.0)
-      xpath (~> 3.2)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -78,13 +62,23 @@ GEM
     connection_pool (2.5.3)
     crass (1.0.6)
     csv (3.3.5)
+    database_cleaner-active_record (2.2.1)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     date (3.4.1)
+    diff-lcs (1.6.2)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.13.1)
     execjs (2.10.0)
+    factory_bot (6.4.5)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     ffi (1.17.2)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -94,7 +88,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    io-like (0.4.0)
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -112,7 +105,6 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
-    matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.5)
@@ -131,7 +123,6 @@ GEM
     nokogiri (1.15.7-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.9)
-    public_suffix (5.1.1)
     puma (3.12.6)
     racc (1.8.1)
     rack (2.2.17)
@@ -150,6 +141,10 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.2.8.1)
       sprockets-rails (>= 2.0.0)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.3.0)
       activesupport (>= 5.0.0)
       minitest
@@ -176,10 +171,24 @@ GEM
       redis-client (>= 0.22.0)
     redis-client (0.25.1)
       connection_pool
-    regexp_parser (2.10.0)
-    rexml (3.4.1)
+    rspec-core (3.13.5)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.5)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (5.1.2)
+      actionpack (>= 5.2)
+      activesupport (>= 5.2)
+      railties (>= 5.2)
+      rspec-core (~> 3.10)
+      rspec-expectations (~> 3.10)
+      rspec-mocks (~> 3.10)
+      rspec-support (~> 3.10)
+    rspec-support (3.13.4)
     ruby_dep (1.5.0)
-    rubyzip (2.4.1)
     sass (3.7.4)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -191,10 +200,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    selenium-webdriver (4.9.0)
-      rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2, < 3.0)
-      websocket (~> 1.0)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
     sidekiq (7.3.9)
       base64
       connection_pool (>= 2.3.0)
@@ -229,13 +236,10 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    websocket (1.2.11)
     websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    xpath (3.2.0)
-      nokogiri (~> 1.8)
 
 PLATFORMS
   x86_64-linux
@@ -244,20 +248,22 @@ DEPENDENCIES
   aasm
   bootsnap (>= 1.1.0)
   byebug
-  capybara (>= 2.15)
-  chromedriver-helper
   coffee-rails (~> 4.2)
+  database_cleaner-active_record
   dotenv-rails
+  factory_bot_rails
   httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.8)
+  rails-controller-testing
   rails_live_reload
   redis
+  rspec-rails
   sass-rails (~> 5.0)
-  selenium-webdriver
+  shoulda-matchers (~> 5.0)
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
