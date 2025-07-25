@@ -5,11 +5,15 @@
     </li>
 
     <li>
-      <%= link_to "Keywords", keywords_path, class: "nav-link #{'bg-primary text-white' if params[:controller] == 'keywords'}" %>
+      <%= link_to "Palavras Chaves", keywords_path, class: "nav-link #{'bg-primary text-white' if params[:controller] == 'keywords'}" %>
     </li>
 
     <li>
-      <%= link_to "Analyzes", analyze_index_path, class: "nav-link #{'bg-primary text-white' if params[:controller] == 'analyze'}" %>
+      <%= link_to "Analizes", analyze_index_path, class: "nav-link #{'bg-primary text-white' if params[:controller] == 'analyze'}" %>
+    </li>
+
+    <li>
+      <%= link_to "Usuários", users_path, class: "nav-link #{'bg-primary text-white' if params[:controller] == 'users'}" %>
     </li>
   </ul>
 </aside>

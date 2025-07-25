@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   get "/progress/:username", to: "analyze#progress", as: :progress
 
   resources :keywords, only: %i[index create update show destroy]
+  resources :users
 end

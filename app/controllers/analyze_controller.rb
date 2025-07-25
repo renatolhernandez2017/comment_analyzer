@@ -29,7 +29,7 @@ class AnalyzeController < ApplicationController
     return render json: { error: "Analysis not available yet" }, status: :processing unless @analysis
 
     group_stats = Analysis.all.map(&:stats)
-    words = group_stats.flat_map { |s| s["word_counts"] }
+    words = group_stats.map { |b| b&.values || 0 }.sum()
 
     render json: {
       user: @user.username,
@@ -85,7 +85,7 @@ class AnalyzeController < ApplicationController
   def mean(arr)
     arr = arr.compact.map(&:to_f)
 
-    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
+    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?) || arr.sum <= 0
 
     arr.sum / arr.size
   end

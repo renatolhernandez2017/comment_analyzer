@@ -1,0 +1,29 @@
+<div class="flex items-center m-5">
+  <h1 class="text-2xl text-center text-primary mx-auto">
+    Listagem de Usuários
+  </h1>
+</div>
+
+<div class="flex flex-col mt-10">
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full text-sm font-semibold text-center">
+      <thead class="text-base">
+        <tr>
+          <th>ID</th>
+          <th>ID Externo</th>
+          <th>Nome</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each_with_index do |user, index| %>
+          <tr class="border-t border-black items-center <%= index % 2 == 0 ? "bg-gray-200" : "bg-gray-100" %>">
+            <td><%= user.id %></td>
+            <td><%= user.external_id %></td>
+            <td><%= user.username %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
