@@ -87,7 +87,7 @@ Necessário ter o VsCode instalado para a execução
 - http://localhost:3000/progress/id-usuario
 
 ### Resultados de métricas Individual com Grupo (Requisição GET)
-- http://localhost:3000/results/username-usuario
+- http://localhost:3000/results/id-usuario
 
 ### Resultados de métricas de Grupo (Requisição GET)
 - http://localhost:3000/results_groups
