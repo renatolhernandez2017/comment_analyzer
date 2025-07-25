@@ -64,20 +64,35 @@ Necessário ter o vscode para execução
 
 - git@github.com:renatolhernandez2017/comment_analyzer.git
 - cd comment_analyzer
-
 - code .
 - Conectar-se ao Container de Desenvolvimento
 - bin/dev
-
 - localhost:3000/
 
 ## 📬 Testes de Endpoints
 
-Resultados de métricas de Grupo
-- http://localhost:3000/results_groups
+Listagem de Usuários
+Requisição GET
+- https://jsonplaceholder.typicode.com/users
 
-Resultados de métricas Individual com Grupo
-- http://localhost:3000/results/NomeUsuário
+Criar Usuário
+Requisição POST
+- http://localhost:3000/api/users
+
+- **Conteudo do Body**:
+  ```ruby
+    {
+      "username": "Elwyn.Skiles"
+    }
 
 Resultados do Progresso da execução
-- http://localhost:3000/progress/NomeUsuário
+Requisição GET
+- http://localhost:3000/progress/id-usuario
+
+Resultados de métricas Individual com Grupo
+Requisição GET
+- http://localhost:3000/results/username-usuario
+
+Resultados de métricas de Grupo
+Requisição GET
+- http://localhost:3000/results_groups

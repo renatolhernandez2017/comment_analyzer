@@ -22,7 +22,7 @@ class AnalyzeController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:username])
+    @user = User.find(params[:id])
     return render json: { error: "User not found" }, status: :not_found unless @user
 
     @analysis = @user.analysis
@@ -46,7 +46,7 @@ class AnalyzeController < ApplicationController
   end
 
   def progress
-    @user = User.find_by(username: params[:username])
+    @user = User.find(params[:id])
     @total = @user.comments.count
     @processed = @user.comments.where.not(status: 'new').count
     @progress = (@processed.to_f / @total * 100).round(2)
