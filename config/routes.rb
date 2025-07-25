@@ -2,9 +2,12 @@ require "sidekiq/web"
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
-  root "analyze#index"
+  root "home#index"
 
-  post "/analyze", to: "analyze#create"
+  resources :analyze, only: %i[index create update destroy]
+
   get "/results/:username", to: "analyze#show", as: :results
   get "/progress/:username", to: "analyze#progress", as: :progress
+
+  resources :keywords, only: %i[index create update show destroy]
 end

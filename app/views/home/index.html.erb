@@ -1,0 +1,11 @@
+<div class="flex flex-col">
+  <%= form_with url: analyze_index_path, method: :post, local: true do |form| %>
+    <h3 class="text-lg font-bold">Escolha um usuário:</h3>
+
+    <section class="max-w-4xl">
+      <%= form.select :username, @user_names, { include_blank: true }, class: "select select-bordered", required: true %>
+
+      <%= form.submit "Iniciar análise", class: "btn rounded-lg bg-success text-white my-5" %>
+    </section>
+  <% end %>
+</div>

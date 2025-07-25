@@ -1,11 +1,12 @@
 class AnalyzeController < ApplicationController
+  before_action :set_keywords
+
   def index
+    @analysis = Analysis.all.order(created_at: :desc)
   end
 
   def create
     username = params[:username]
-
-    quebrar
 
     if username.blank?
       redirect_to root_path, alert: "Username obrigatório"
@@ -60,8 +61,13 @@ class AnalyzeController < ApplicationController
 
   private
 
+  def set_keywords
+    @keywords = Keyword.pluck(:id, :word)
+  end
+
   def median(arr)
-    return 0 if arr.empty?
+    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
+
     sorted = arr.sort
     mid = sorted.length / 2
     sorted.length.odd? ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0
@@ -69,7 +75,8 @@ class AnalyzeController < ApplicationController
 
   def std_dev(arr)
     arr = arr.compact.map(&:to_f)
-    return 0 if arr.empty?
+
+    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
 
     m = mean(arr)
     Math.sqrt(arr.map { |x| (x - m)**2 }.sum / arr.size)
@@ -77,7 +84,8 @@ class AnalyzeController < ApplicationController
 
   def mean(arr)
     arr = arr.compact.map(&:to_f)
-    return 0 if arr.empty?
+
+    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
 
     arr.sum / arr.size
   end

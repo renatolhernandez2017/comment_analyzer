@@ -1,0 +1,15 @@
+<div class="modal-box">
+  <div class="flex items-start">
+    <h3 class="text-lg font-bold"><%= title %></h3>
+
+    <div class="ml-auto">
+      <form method="dialog">
+        <button class="btn btn-ghost bg-gray-200">x</button>
+      </form>
+    </div>
+  </div>
+
+  <p class="py-4">
+    <%= render form_render, keyword: keyword %>
+  </p>
+</div>

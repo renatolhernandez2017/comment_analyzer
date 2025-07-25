@@ -1,20 +1,37 @@
-<h1>Analisador de Comentários</h1>
+<div class="flex items-center m-5">
+  <h1 class="text-2xl text-center text-primary mx-auto">
+    Listagem de Analizes
+  </h1>
+</div>
 
-<%= form_with url: analyze_path, method: :post, local: true do |form| %>
-  <div>
-    <p>
-      Nomes para usar como teste :
-      <b>
-        (Bret, Antonette, Samantha, Karianne, Kamren, Leopoldo_Corkery,
-          Elwyn.Skiles, Maxime_Nienow, Delphine, Moriah.Stanton)
-      </b>
-    </p>
+<div class="flex flex-col mt-10">
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full text-sm font-semibold text-center">
+      <thead class="text-base">
+        <tr>
+          <th>ID</th>
+          <th>Usuário</th>
+          <th>Quantidade Aprovados</th>
+          <th>Quantidade Rejeitados</th>
+          <th>Estatísticas</th>
+        </tr>
+      </thead>
 
-    <%= form.label :username, "Nome de usuário do JSONPlaceholder" %><br>
-    <%= form.text_field :username, required: true %>
+      <tbody>
+        <% @analysis.each_with_index do |analyze, index| %>
+          <tr class="border-t border-black items-center <%= index % 2 == 0 ? "bg-gray-200" : "bg-gray-100" %>">
+            <td><%= analyze.id %></td>
+            <td><%= analyze.user.username %></td>
+            <td><%= analyze.approved_count %></td>
+            <td><%= analyze.rejected_count %></td>
+            <td class="gap-5">
+              <p><b class="text-primary">Média:</b> <%= analyze.stats["mean"] %></p>
+              <p><b class="text-primary">Mediana:</b> <%= analyze.stats["median"] %></p>
+              <p><b class="text-primary">Desvio Padrão:</b> <%= analyze.stats["std_dev"] %></p>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-
-  <br>
-
-  <%= form.submit "Iniciar análise" %>
-<% end %>
+</div>

@@ -1,0 +1,14 @@
+<%= form_with model: keyword, url: keyword.persisted? ? keyword_path(keyword) : keywords_path do |f| %>
+  <hr class="left-0 absolute w-full border-black">
+
+  <section class="p-6 md:max-w-4xl">
+    <div class="form-control my-2">
+      <%= f.label :word, "Palavra Chave", class: 'label label-text text-black' %>
+      <%= f.text_field :word, class: "input input-bordered" %>
+    </div>
+
+    <hr class="left-0 absolute w-full my-5 border-black">
+  </section>
+
+  <%= f.submit "Salvar", class: "btn rounded-lg bg-success text-white my-5 float-right" %>
+<% end %>

@@ -1,0 +1,52 @@
+<div class="flex items-center m-5">
+  <h1 class="text-2xl text-center text-primary mx-auto">
+    Listagem de Palavras Chaves
+  </h1>
+
+  <button type="button" class="btn btn-success rounded-lg text-white" onclick="document.getElementById('criar_keyword').showModal();" title="Editar">
+    Nova Palavra Chave
+  </button>
+
+  <dialog id="criar_keyword" class="modal place-items-center">
+    <%= render "shared/modal", title: "Criar Palavra Chave", form_render: "keywords/form", keyword: @keyword %>
+  </dialog>
+</div>
+
+<div class="flex flex-col mt-10">
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full text-sm font-semibold text-center">
+      <thead class="text-base">
+        <tr>
+          <th>ID</th>
+          <th>Palavra Chave</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @keywords.each_with_index do |keyword, index| %>
+          <tr class="border-t border-black items-center <%= index % 2 == 0 ? "bg-gray-200" : "bg-gray-100" %>">
+            <td><%= keyword.id %></td>
+            <td><%= keyword.word %></td>
+
+            <td class="flex justify-center items-center gap-2 h-10">
+              <button onclick="document.getElementById('edit_keyword<%= keyword.id %>').showModal();" title="Editar">
+                <span class="material-symbols-outlined text-primary">edit</span>
+              </button>
+
+              <dialog id="edit_keyword<%= keyword.id %>" class="modal place-items-center">
+                <%= render "shared/modal", title: "Editar Palavra Chave", form_render: "keywords/form", keyword: keyword %>
+              </dialog>
+
+              <%= link_to keyword_path(keyword), method: :delete,
+                  data: { confirm: "Tem certeza que deseja apagar?" },
+                  title: "Apagar definitivamente" do %>
+                <span class="material-symbols-outlined text-primary">delete</span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
