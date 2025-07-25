@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
   get "/results/:username", to: "analyze#show", as: :results
   get "/progress/:username", to: "analyze#progress", as: :progress
+  get "/results_groups", to: "keywords#show", as: :results_groups
 
-  resources :keywords, only: %i[index create update show destroy]
+  resources :keywords, only: %i[index create update destroy]
   resources :users
 end

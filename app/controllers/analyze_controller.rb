@@ -22,7 +22,7 @@ class AnalyzeController < ApplicationController
   end
 
   def show
-    @user = User.find_by(username: params[:username].capitalize)
+    @user = User.find_by(username: params[:username])
     return render json: { error: "User not found" }, status: :not_found unless @user
 
     @analysis = @user.analysis
@@ -38,9 +38,9 @@ class AnalyzeController < ApplicationController
       stats: @analysis.stats,
       group_stats: {
         users_analyzed: Analysis.count,
-        mean: mean(words),
-        median: median(words),
-        std_dev: std_dev(words)
+        mean: Analysis.mean(words),
+        median: Analysis.median(words),
+        std_dev: Analysis.std_dev(words)
       }
     }
   end
@@ -63,30 +63,5 @@ class AnalyzeController < ApplicationController
 
   def set_keywords
     @keywords = Keyword.pluck(:id, :word)
-  end
-
-  def median(arr)
-    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
-
-    sorted = arr.sort
-    mid = sorted.length / 2
-    sorted.length.odd? ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2.0
-  end
-
-  def std_dev(arr)
-    arr = arr.compact.map(&:to_f)
-
-    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?)
-
-    m = mean(arr)
-    Math.sqrt(arr.map { |x| (x - m)**2 }.sum / arr.size)
-  end
-
-  def mean(arr)
-    arr = arr.compact.map(&:to_f)
-
-    return 0 if arr.empty? || (arr.first.nil? || arr.last.nil?) || arr.sum <= 0
-
-    arr.sum / arr.size
   end
 end

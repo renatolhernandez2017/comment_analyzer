@@ -18,7 +18,5 @@ class RecalculateMetricsJob < ApplicationJob
       rejected_count: rejected,
       stats: analysis
     )
-
-    # RecalculateGroupMetricsJob.perform_later
   end
 end
