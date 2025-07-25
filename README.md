@@ -60,7 +60,7 @@ Durante o processamento, as seguintes estatísticas podem ser calculadas:
 
 ## Como rodar localmente
 
-Necessário ter o vscode para execução
+Necessário ter o VsCode instalado para a execução
 
 - git@github.com:renatolhernandez2017/comment_analyzer.git
 - cd comment_analyzer
@@ -71,12 +71,10 @@ Necessário ter o vscode para execução
 
 ## 📬 Testes de Endpoints
 
-Listagem de Usuários
-Requisição GET
+### Listagem de Usuários (Requisição GET)
 - https://jsonplaceholder.typicode.com/users
 
-Criar Usuário
-Requisição POST
+### Criar Usuário (Requisição POST)
 - http://localhost:3000/api/users
 
 - **Conteudo do Body**:
@@ -85,14 +83,35 @@ Requisição POST
       "username": "Elwyn.Skiles"
     }
 
-Resultados do Progresso da execução
-Requisição GET
+### Resultados do Progresso da execução (Requisição GET)
 - http://localhost:3000/progress/id-usuario
 
-Resultados de métricas Individual com Grupo
-Requisição GET
+### Resultados de métricas Individual com Grupo (Requisição GET)
 - http://localhost:3000/results/username-usuario
 
-Resultados de métricas de Grupo
-Requisição GET
+### Resultados de métricas de Grupo (Requisição GET)
 - http://localhost:3000/results_groups
+
+### Lista todas as Palavras Chaves (Requisição GET)
+- http://localhost:3000/api/keywords
+
+### Criar Palavra Chave (Requisição POST)
+- http://localhost:3000/api/keywords
+
+- **Conteudo do Body**:
+  ```ruby
+    {
+      "word": "laudantium"
+    }
+
+### Atualizar palavra Chave (Requisição PATCH)
+- http://localhost:3000/api/keywords/id-keyword
+
+### Apagar uma Palavra Chave
+- http://localhost:3000/api/keywords/id-keyword
+
+- **Conteudo do Body**:
+  ```ruby
+    {
+      "word": "omnis"
+    }

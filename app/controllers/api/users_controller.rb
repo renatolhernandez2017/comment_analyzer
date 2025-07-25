@@ -5,6 +5,7 @@ module Api
     def create
       username = user_params[:username]
       ImportUserDataService.new(username).call
+      sleep(5)
 
       user = User.find_by(username: username)
       total = user.comments.count
@@ -18,6 +19,7 @@ module Api
         progress: "#{(processed.to_f / total * 100).round(2)}%"
       }
 
+      sleep(5)
       render json: { message: 'Usuário criado com sucesso!', user: user, progress: progress }, status: :created
     end
 

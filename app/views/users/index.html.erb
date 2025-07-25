@@ -17,7 +17,7 @@
 
       <tbody>
         <% @users.each_with_index do |user, index| %>
-          <tr class="border-t border-black items-center <%= index % 2 == 0 ? "bg-gray-200" : "bg-gray-100" %>">
+          <tr class="border-t border-black items-center h-8 <%= index % 2 == 0 ? "bg-gray-200" : "bg-gray-100" %>">
             <td><%= user.id %></td>
             <td><%= user.external_id %></td>
             <td><%= user.username %></td>

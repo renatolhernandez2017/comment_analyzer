@@ -1,6 +1,4 @@
 class KeywordsController < ApplicationController
-  before_action :set_users, only: %i[create update]
-
   def index
     @keywords = Keyword.all.order(created_at: :desc)
     @keyword = Keyword.new
@@ -54,9 +52,5 @@ class KeywordsController < ApplicationController
 
   def keyword_params
     params.require(:keyword).permit(:word)
-  end
-
-  def set_users
-    @users = User.pluck(:id)
   end
 end

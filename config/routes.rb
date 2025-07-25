@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :users, only: %i[create]
+    resources :keywords, only: %i[index create update destroy]
   end
 end
