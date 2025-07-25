@@ -72,16 +72,6 @@ Necessário ter o vscode para execução
 - localhost:3000/
 
 ## 📬 Testes de Endpoints
-Você pode testar os endpoints com a coleção Postman aqui.
-
-Principais Endpoints:
-
-- Método	 Rota	              Descrição
-- GET	    /posts/:id/comments   Lista comentários do post
-- POST	/keywords	          Cria nova palavra-chave
-- PUT	    /keywords/:id	      Atualiza uma keyword
-- GET	    /results/groups	      Retorna resultados consolidados em JSON
-- POST	/comments	          Cria um novo comentário
 
 Resultados de métricas de Grupo
 - http://localhost:3000/results_groups
